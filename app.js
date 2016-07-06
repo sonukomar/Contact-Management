@@ -1,8 +1,8 @@
   /*
-  @ Module name       -
-  @ Author            -
-  @ Creation Date     -
-  @ Modification Date -
+  @ Module name       - Angular Contact Management System
+  @ Author            - Sonu Kumar
+  @ Creation Date     - 6th July 2016
+  @ Modification Date - 6th July 2016
   */
 
   /* Importing all the required modules */
@@ -11,6 +11,7 @@
 
   /* Setting path for static files */
   app.use('/static', express.static('static'));
+
 
   /* Home page routing defination */
   app.get('', function (req, res) {
@@ -34,7 +35,10 @@
     res.send("Successfully added ")
   })
 
+  app.get('/template/typeahead/typeahead-popup.html', function (req, res) {
 
+    res.sendFile( __dirname + "/template/typeahead/typeahead-popup.html" );
+  })
 
   /* function to handle form submition */
   app.get('/login', function (req, res) {
@@ -55,6 +59,6 @@
     var host = server.address().address
     var port = server.address().port
 
-    console.log("Example app listening at http://%s:%s", host, port)
+    console.log("Contact Management app listening at http://%s:%s",host, port)
 
   })

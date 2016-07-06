@@ -1,8 +1,20 @@
-var app = angular.module('myApp', []);
-app.controller('dashboardController', function($scope,$http) {
+var app = angular.module('myApp', ["ui.bootstrap",'ui.bootstrap.typeahead']);
+
+app.factory("States", function(){
+  var states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Dakota", "North Carolina", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"];
+  
+  return states;
+  
+});
+
+
+app.controller('dashboardController', function($scope,$http,States) {
 
 /* setting variable flag to home initially */
 $scope.pageName = 'home';
+
+/* Initalizing type ahead source */ 
+$scope.states = ["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado"];
 
 
 /* Navigation function */
