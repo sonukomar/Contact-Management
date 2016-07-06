@@ -1,0 +1,11 @@
+img.logo{width:64%;margin-left:16%;}
+
+.btn-primary{
+    background: rgba(6, 5, 5, 0.34);
+
+    border-color: #5a4a42;
+    box-shadow: 5px 4px 3px #3e4548;}
+
+.btn-primary:hover{
+  background: #2f2f2f;
+}
