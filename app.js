@@ -1,64 +1,74 @@
-  /*
+/*
   @ Module name       - Angular Contact Management System
   @ Author            - Sonu Kumar
   @ Creation Date     - 6th July 2016
-  @ Modification Date - 6th July 2016
+  @ Modification Date - 7th July 2016
   */
 
-  /* Importing all the required modules */
-  var express = require('express');
-  var app = express();
+/* Importing all the required modules */
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser');
 
-  /* Setting path for static files */
-  app.use('/static', express.static('static'));
+// Create application/x-www-form-urlencoded parser
+var urlencodedParser = bodyParser.urlencoded({
+        extended: false
+    })
+
+/* Setting path for static files */
+app.use('/static', express.static('static'));
 
 
-  /* Home page routing defination */
-  app.get('', function (req, res) {
+/* Home page routing defination */
+app.get('', function(req, res) {
+    console.log("* Serving:" + __dirname + "/" + "templates" + "/" + "index.html");
+    res.sendFile(__dirname + "/" + "templates" + "/" + "index.html");
+})
 
-     console.log("Serving:"+ __dirname + "/" + "templates"+"/"+"index.html");
-     res.sendFile( __dirname + "/" + "templates"+"/"+"index.html" );
-  })
+/* Dashboard page routing defination */
+app.get('/dashboard', function(req, res) {
+    console.log("* Entered User Email: " + req.query.userEmail);
+    console.log("* Entered Password: " + req.query.userPassword);
+    if (req.query.userPassword == 'sonu') {
+        console.log("* Serving:" + __dirname + "/" + "templates" + "/" + "dashboard.html");
+        res.sendFile(__dirname + "/" + "templates" + "/" + "dashboard.html");
+    } else {
+        console.log("* Invalid Credentials!!");
+        res.sendFile(__dirname + "/" + "templates" + "/" + "index.html");
+    }
 
-  /* Dashboard page routing defination */
-  app.post('/dashboard', function (req, res) {
-      console.log(req);
-      console.log("Serving:"+ __dirname + "/" + "templates"+"/"+"dashboard.html" );
-      res.sendFile( __dirname + "/" + "templates"+"/"+"dashboard.html" );
-  })
+})
 
-  /* add new user defination */
-  app.get('/add_new_contact', function (req, res) {
+/* add new user defination */
+app.get('/add_new_contact', urlencodedParser, function(req, res) {
+    console.log(req);
+    var newContactObj = {
 
-     console.log(req);
+        "name": req.query.contactName,
+        "mobile": req.query.contactMobie,
+        "phone": req.query.contactPhone,
+        "email": req.query.contactEmail,
+        "price": "48000"
+    }
+
     //  res.sendFile( __dirname + "/" + "templates"+"/"+"dashboard.html" );
-    res.send("Successfully added ")
-  })
-
-  app.get('/template/typeahead/typeahead-popup.html', function (req, res) {
-
-    res.sendFile( __dirname + "/template/typeahead/typeahead-popup.html" );
-  })
-
-  /* function to handle form submition */
-  app.get('/login', function (req, res) {
-
-     // Prepare output in JSON format
-     response = {
-         first_name:req.query.first_name,
-         last_name:req.query.last_name
-     };
-     console.log(response);
-     res.end(JSON.stringify(response));
-  })
+    // res.end(JSON.stringify(newContactObj));
+})
 
 
-  /* Adding listener to the server */
-  var server = app.listen(8081, function () {
+/* Adding listener to the server */
+var server = app.listen(8081, function() {
 
     var host = server.address().address
     var port = server.address().port
 
-    console.log("Contact Management app listening at http://%s:%s",host, port)
+    /* Information part about the server on the console */ 
+    console.log("");
+    console.log("=================================================");
+    console.log("Contact management system welcomes you, Enjoy!!");
+    console.log("=================================================");
+    console.log("");
+    console.log(" * Contact Management app listening at http://%s:%s ......", host, port)
+    /* Information part about the serveer on the console ends */
 
-  })
+})

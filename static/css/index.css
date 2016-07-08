@@ -4,7 +4,7 @@ img.logo{width:64%;margin-left:16%;}
       background: rgba(6, 5, 5, 0.34);
     border-color: rgba(90, 74, 66, 0.11);
     box-shadow: 5px 4px 3px rgba(62, 69, 72, 0.58);
-
+}
 .btn-primary:hover{
   background: #2f2f2f;
 }
